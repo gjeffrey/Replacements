@@ -2,6 +2,16 @@ import Foundation
 import KeyboardBridge
 import ReplacementCore
 
+private func validateMacWrites(_ changes: [Change]) throws {
+    for change in changes {
+        if let old = change.old, old.shortcut.isEmpty {
+            throw ReplacementError.invalid("Words without shortcuts can be viewed and exported here. Edit or delete them on your iPhone or iPad.")
+        }
+        if let new = change.new, new.shortcut.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            throw ReplacementError.invalid("A shortcut is required on macOS. To add a word without a shortcut, use Text Replacement on your iPhone or iPad.")
+        }
+    }
+}
 public actor NativeBackend: ReplacementBackend {
     private let bridge = RPKeyboardBridge()
     private let database: URL
@@ -50,7 +60,11 @@ public actor NativeBackend: ReplacementBackend {
         guard Set(result.map(\.id)).count == result.count else { throw ReplacementError.invalid("Native identifiers are not unique; writes are disabled.") }
         return result
     }
+    public func validate(_ changes: [Change]) async throws {
+        try validateMacWrites(changes)
+    }
     public func apply(_ change: Change) async throws {
+        try await validate([change])
         try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
             let completion: @Sendable (Error?) -> Void = { error in
                 if let error { continuation.resume(throwing: error) }
@@ -77,5 +91,6 @@ public actor DemoBackend: ReplacementBackend {
     ]
     public init() {}
     public func read() async throws -> ReadResult { ReadResult(entries: entries, source: "Demo · isolated from macOS", writable: true) }
-    public func apply(_ change: Change) async throws { entries = try change.applying(to: entries) }
+    public func validate(_ changes: [Change]) async throws { try validateMacWrites(changes) }
+    public func apply(_ change: Change) async throws { try validateMacWrites([change]); entries = try change.applying(to: entries) }
 }

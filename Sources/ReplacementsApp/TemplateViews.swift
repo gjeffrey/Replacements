@@ -108,6 +108,7 @@ struct TemplateSetupView: View {
             do { try field.validate(details[field]) } catch { return error.localizedDescription }
         }
         guard let phrase else { return nil }
+        guard !shortcut.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return "A shortcut is required on macOS." }
         let pair = Pair(shortcut: shortcut, phrase: phrase)
         do { try Validation.check(pair) } catch { return error.localizedDescription }
         return Validation.canInsert(pair, into: model.entries) ? nil : "This shortcut is already in your library. Choose another one."
@@ -143,7 +144,7 @@ struct TemplateSetupView: View {
             }
             if let problem { Text(problem).font(.caption).foregroundStyle(.orange) }
             HStack {
-                Button("Cancel") { dismiss() }.keyboardShortcut(.cancelAction)
+                Button("Cancel") { dismiss() }.keyboardShortcut(.cancelAction).disabled(model.busy)
                 Spacer()
                 if model.busy { ProgressView().controlSize(.small) }
                 Button("Add to My Replacements") {
@@ -151,6 +152,7 @@ struct TemplateSetupView: View {
                 }.buttonStyle(.borderedProminent).keyboardShortcut(.defaultAction).disabled(!model.canWrite || phrase == nil || problem != nil)
             }
         }.padding(26).frame(width: 560, height: template.fields.isEmpty ? 410 : 650)
+            .modifier(SheetOperationFeedback(model: model))
     }
 }
 struct PersonalDetailsView: View {

@@ -6,8 +6,8 @@
 <key>CFBundleIdentifier</key><string>local.replacements.mac</string>
 <key>CFBundleExecutable</key><string>Replacements</string>
 <key>CFBundlePackageType</key><string>APPL</string>
-<key>CFBundleShortVersionString</key><string>0.3.1</string>
-<key>CFBundleVersion</key><string>6</string>
+<key>CFBundleShortVersionString</key><string>0.3.2</string>
+<key>CFBundleVersion</key><string>7</string>
 <key>SUFeedURL</key><string>https://raw.githubusercontent.com/gjeffrey/Replacements/main/appcast.xml</string>
 <key>SUPublicEDKey</key><string>dN7UEq2B+H/ic+vqJuKLdryFfxnGUrpKvXh/TvkpyD8=</string>
 <key>SUEnableAutomaticChecks</key><true/>

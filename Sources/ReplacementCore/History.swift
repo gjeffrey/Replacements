@@ -39,7 +39,11 @@ public struct ReadResult: Sendable {
 }
 public protocol ReplacementBackend: Sendable {
     func read() async throws -> ReadResult
+    func validate(_ changes: [Change]) async throws
     func apply(_ change: Change) async throws
+}
+public extension ReplacementBackend {
+    func validate(_ changes: [Change]) async throws {}
 }
 public struct MutationResult: Sendable {
     public var read: ReadResult
@@ -59,6 +63,8 @@ public actor MutationEngine {
         guard Validation.sameContents(current.entries, baseline) else { throw ReplacementError.stale }
         var planned = current.entries
         for change in changes { planned = try change.applying(to: planned) }
+        // Platform restrictions must reject the entire batch before any backup or write.
+        try await backend.validate(changes)
         let snapshot = Snapshot(reason: reason, entries: current.entries)
         try history.save(snapshot) // A failed backup prevents every native write.
         var expected = current.entries

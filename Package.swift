@@ -13,7 +13,7 @@ let package = Package(
         .executableTarget(name: "ReplacementsApp", dependencies: ["ReplacementCore", "ReplacementNative", .product(name: "Sparkle", package: "Sparkle")], linkerSettings: [.unsafeFlags(["-Xlinker", "-rpath", "-Xlinker", "@executable_path/../Frameworks"])]),
         .executableTarget(name: "ReplacementProbe", dependencies: ["ReplacementCore", "ReplacementNative"]),
         .testTarget(name: "ReplacementCoreTests", dependencies: ["ReplacementCore"]),
-        .testTarget(name: "ReplacementNativeTests", dependencies: ["KeyboardBridge"]),
+        .testTarget(name: "ReplacementNativeTests", dependencies: ["KeyboardBridge", "ReplacementNative", "ReplacementCore"]),
         .testTarget(name: "ReplacementsAppTests", dependencies: ["ReplacementsApp", "ReplacementCore"])
     ], swiftLanguageModes: [.v5]
 )

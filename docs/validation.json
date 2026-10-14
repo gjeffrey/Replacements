@@ -2,7 +2,7 @@
   "date": "2026-10-13",
   "platform": "macOS 27.0.1 (26A434), Apple Silicon",
   "automatedTests": {
-    "passed": 36,
+    "passed": 41,
     "failed": 0
   },
   "nativeProof": {
@@ -19,7 +19,7 @@
   "developerID": "verified installed identity",
   "notarization": {
     "status": "Accepted",
-    "submissionID": "2dff7936-ef08-4e15-b65c-1445f0ae55c2",
+    "submissionID": "e7ecee55-2f72-4d42-a4d4-7c4df94dae5c",
     "stapled": true,
     "freshArchiveGatekeeperAssessment": "Notarized Developer ID"
   },
@@ -53,12 +53,12 @@
     "AGPLOrUnlicensedSourceIncorporated": false,
     "license": "MIT"
   },
-  "version": "0.3.1",
+  "version": "0.3.2",
   "architectures": [
     "arm64",
     "x86_64"
   ],
-  "archiveSHA256": "3aac2311b9b29bd6c9a2f44a7e5e4c3af89be5f5702024b61b9ece1b6c8358f1",
+  "archiveSHA256": "37c35ba29a3c02b68f02eae9397c0668b4c88dd0b13a6ce193934326f66279d7",
   "templates": {
     "count": 59,
     "rememberedDetails": "local private-permission profile; isolated demo profile",
@@ -84,7 +84,7 @@
     "nativeMutationsDuringCheck": false
   },
   "compactLibrary": {
-    "dictionaryDemoAdd": "1 word and 7 shortcuts; empty shortcut is kept out of Shortcuts",
+    "dictionaryDemoAdd": "Historical 0.3.0 demo-only check; native writes were not tested then. Dictionary section removed in 0.3.2.",
     "selectedPhrasePreview": "verified",
     "menuBar": "optional, default off",
     "nativeWritesDuringUIChecks": false
@@ -104,5 +104,18 @@
     "updatedTestCopyRelaunched": true,
     "nativeEntriesUnchangedDuringTest": 31,
     "githubCI": "passed"
+  },
+  "dictionaryRegression": {
+    "nativeEmptyShortcut": "not verified; empty string rejected, nil did not preserve an empty shortcut and later appeared as a self-replacement",
+    "removal": "separate dictionary UI removed; new empty shortcuts and modifications of existing word-only rows rejected before backup/write",
+    "existingWords": "visible in Shortcuts and exportable; no word-only rows removed",
+    "feedback": "save failures remain with the presented form; refresh reconciles without resending",
+    "nativeRoundTrip": "normal add/edit/delete verified again; markers cleaned; all pre-investigation entries preserved",
+    "feedbackUI": "Isolated harness using production views: error visible before Cancel; phrase preserved after Refresh; Cancel after failure showed no second alert."
+  },
+  "icon": {
+    "concept": "brb \u2192 be right back",
+    "font": "macOS San Francisco system font, .AppleSystemUIFontDemi",
+    "rendering": "original AppKit paths and native typography; editable renderer included"
   }
 }

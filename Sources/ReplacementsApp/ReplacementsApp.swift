@@ -21,7 +21,7 @@ import AppKit
                     Button("Check for Updates…") { updates.check() }.disabled(!updates.ready)
                 }
                 CommandGroup(replacing: .newItem) {
-                    Button(model.section == .dictionary ? "New Dictionary Word…" : "New Replacement…") { model.showAdd = true }.keyboardShortcut("n").disabled(!model.canWrite)
+                    Button("New Replacement…") { model.showAdd = true }.keyboardShortcut("n").disabled(!model.canWrite)
                     Button("Import…") { model.importFile() }.keyboardShortcut("i", modifiers: [.command, .shift]).disabled(!model.canWrite)
                 }
                 CommandMenu("Replacements") {

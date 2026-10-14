@@ -8,31 +8,54 @@ struct AddView: View {
     @State private var shortcut = ""
     @State private var phrase = ""
     @FocusState private var focus: Bool
-    private let dictionaryWord: Bool
-    // Seed the form's purpose once when it opens; navigation behind a sheet cannot change it.
-    init(model: AppModel) { self.model = model; dictionaryWord = model.section == .dictionary }
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
-            Text(dictionaryWord ? "New dictionary word" : "New replacement").font(.title2.bold())
+            Text("New replacement").font(.title2.bold())
             Form {
-                if dictionaryWord {
-                    TextField("Word", text: $phrase).focused($focus).autocorrectionDisabled()
-                } else {
-                    TextField("Shortcut", text: $shortcut).focused($focus)
-                    TextField("Phrase", text: $phrase, axis: .vertical).lineLimit(3...7)
-                }
+                TextField("Shortcut", text: $shortcut).focused($focus).autocorrectionDisabled()
+                TextField("Phrase", text: $phrase, axis: .vertical).lineLimit(3...7)
             }
-            Text(dictionaryWord ? "Apple will leave this word as you type it. No shortcut is needed." : "Leave the shortcut empty to add a dictionary word.").font(.callout).foregroundStyle(.secondary)
+            Text("Type a short shortcut to insert your phrase.").font(.callout).foregroundStyle(.secondary)
             if let problem { Text(problem).font(.caption).foregroundStyle(.orange) }
-            HStack { Button("Cancel") { dismiss() }.keyboardShortcut(.cancelAction); Spacer(); if model.busy { ProgressView().controlSize(.small) }; Button(dictionaryWord ? "Add Word" : "Add Replacement") { Task { if await model.add(shortcut: shortcut, phrase: phrase) { if shortcut.isEmpty { model.navigate(.dictionary) }; dismiss() } } }.buttonStyle(.borderedProminent).keyboardShortcut(.defaultAction).disabled(!model.canWrite || phrase.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || problem != nil) }
+            HStack {
+                Button("Cancel") { dismiss() }.keyboardShortcut(.cancelAction).disabled(model.busy)
+                Spacer()
+                if model.busy { ProgressView().controlSize(.small) }
+                Button("Add Replacement") {
+                    Task { if await model.add(shortcut: shortcut, phrase: phrase) { dismiss() } }
+                }.buttonStyle(.borderedProminent).keyboardShortcut(.defaultAction)
+                    .disabled(!model.canWrite || shortcut.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || phrase.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || problem != nil)
+            }
         }.padding(26).frame(width: 500).onAppear { focus = true }
+            .modifier(SheetOperationFeedback(model: model))
     }
     private var problem: String? {
         guard !phrase.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return nil }
-        if dictionaryWord && phrase.contains(where: \.isNewline) { return "Use one line for your dictionary word." }
+        if shortcut.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty { return "A shortcut is required on macOS." }
         let pair = Pair(shortcut: shortcut, phrase: phrase)
         do { try Validation.check(pair) } catch { return error.localizedDescription }
         return Validation.canInsert(pair, into: model.entries) ? nil : "This shortcut already exists or conflicts with another replacement."
+    }
+}
+/// Keep save failures with the form that caused them; the main window cannot present over a sheet.
+struct SheetOperationFeedback: ViewModifier {
+    @Bindable var model: AppModel
+    func body(content: Content) -> some View {
+        content
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                if let error = model.error {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Label("Couldn’t save", systemImage: "exclamationmark.triangle").font(.callout.weight(.semibold))
+                        Text(error).font(.callout).textSelection(.enabled).fixedSize(horizontal: false, vertical: true)
+                        if model.needsRefresh {
+                            Button("Refresh Library") { Task { await model.refresh() } }.disabled(model.busy)
+                        }
+                    }.frame(maxWidth: .infinity, alignment: .leading).padding(16)
+                        .background(.orange.opacity(0.10)).padding(.horizontal, 26).padding(.bottom, 20)
+                }
+            }
+            .interactiveDismissDisabled(model.busy)
+            .onDisappear { model.error = nil }
     }
 }
 struct ChangeReviewView: View {
@@ -60,8 +83,9 @@ struct ChangeReviewView: View {
                 }.padding(12)
             }.frame(maxHeight: 320).background(.quaternary.opacity(0.3)).clipShape(RoundedRectangle(cornerRadius: 10))
             Text("A backup is required before any write. Bulk operations are verified one at a time; a failure can leave a partial result, available for recovery from History.").font(.caption).foregroundStyle(.secondary)
-            HStack { Button("Cancel") { dismiss() }.keyboardShortcut(.cancelAction); Spacer(); Button("Apply \(review.changes.count) Changes") { Task { await model.executeReview(review) } }.keyboardShortcut(.defaultAction).buttonStyle(.borderedProminent).disabled(!model.canWrite || review.changes.isEmpty) }
+            HStack { Button("Cancel") { dismiss() }.keyboardShortcut(.cancelAction).disabled(model.busy); Spacer(); Button("Apply \(review.changes.count) Changes") { Task { await model.executeReview(review) } }.keyboardShortcut(.defaultAction).buttonStyle(.borderedProminent).disabled(!model.canWrite || review.changes.isEmpty) }
         }.padding(26).frame(width: 610)
+            .modifier(SheetOperationFeedback(model: model))
     }
 }
 struct BulkView: View {
@@ -92,6 +116,7 @@ struct BulkView: View {
                 } catch { problem = error.localizedDescription }
             }.buttonStyle(.borderedProminent).disabled(matches == 0 || !model.canWrite || find == replacement) }
         }.padding(26).frame(width: 500)
+            .modifier(SheetOperationFeedback(model: model))
     }
 }
 struct HistoryView: View {

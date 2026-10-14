@@ -18,8 +18,7 @@ struct ContentView: View {
                 }.padding(16)
                 List(selection: Binding(get: { model.section }, set: { if let destination = $0 { model.navigate(destination) } else { model.section = nil } })) {
                     SwiftUI.Section("Library") {
-                        sidebarRow("Shortcuts", image: "text.alignleft", count: model.shortcutCount).tag(Section.all)
-                        sidebarRow("Dictionary Words", image: "character.book.closed", count: model.dictionaryCount).tag(Section.dictionary)
+                        sidebarRow("Shortcuts", image: "text.alignleft", count: model.entries.count).tag(Section.all)
                         sidebarRow("Duplicates & Conflicts", image: "exclamationmark.triangle", count: model.issueIDs.count).tag(Section.issues)
                     }
                     SwiftUI.Section("Make It Yours") {
@@ -44,7 +43,7 @@ struct ContentView: View {
                     }.padding(12).background(.orange.opacity(0.12))
                 }
                 switch model.section ?? .all {
-                case .all, .dictionary, .issues: library
+                case .all, .issues: library
                 case .templates: TemplateLibraryView(model: model)
                 case .details: PersonalDetailsView(model: model)
                 case .history: HistoryView(model: model)
@@ -63,7 +62,7 @@ struct ContentView: View {
             ToolbarItem {
                 HStack {
                     Image(systemName: "magnifyingglass").foregroundStyle(.secondary)
-                    TextField(model.section == .templates ? "Search templates" : model.section == .dictionary ? "Search dictionary words" : "Search shortcuts or phrases", text: $model.query).textFieldStyle(.plain).focused($searchFocused)
+                    TextField(model.section == .templates ? "Search templates" : "Search shortcuts or phrases", text: $model.query).textFieldStyle(.plain).focused($searchFocused)
                     Button {
                         model.query = ""
                         searchFocused = true
@@ -78,7 +77,7 @@ struct ContentView: View {
                 }
                     .frame(width: 245).padding(6)
             }
-            ToolbarItem { Button { model.showAdd = true } label: { Label(model.section == .dictionary ? "New Word" : "New Replacement", systemImage: "plus") }.disabled(!model.canWrite) }
+            ToolbarItem { Button { model.showAdd = true } label: { Label("New Replacement", systemImage: "plus") }.disabled(!model.canWrite) }
             ToolbarItem {
                 Menu {
                     Button("Import JSON, CSV, or Apple Plist…") { model.importFile() }.disabled(!model.canWrite)
@@ -101,7 +100,7 @@ struct ContentView: View {
         .sheet(isPresented: $model.showAdd) { AddView(model: model) }
         .sheet(isPresented: $model.showBulk) { BulkView(model: model) }
         .sheet(item: $model.review) { ChangeReviewView(model: model, review: $0) }
-        .alert("Replacements", isPresented: Binding(get: { model.error != nil }, set: { if !$0 { model.error = nil } })) {
+        .alert("Replacements", isPresented: Binding(get: { model.showsWindowError }, set: { if !$0 { model.error = nil } })) {
             Button("OK", role: .cancel) { model.error = nil }
         } message: { Text(model.error ?? "") }
     }
@@ -115,14 +114,12 @@ struct ContentView: View {
                     .font(.callout).foregroundStyle(.secondary).padding(12)
             }
             if model.loaded && model.visible.isEmpty {
-                ContentUnavailableView(model.query.isEmpty ? (model.section == .issues ? "Everything looks tidy" : model.section == .dictionary ? "Your dictionary" : "Make your first shortcut") : "No matching entries", systemImage: model.section == .issues ? "checkmark.circle" : model.section == .dictionary ? "character.book.closed" : "text.magnifyingglass", description: Text(model.query.isEmpty ? (model.section == .dictionary ? "Add words you want Apple to leave as you type them." : "Use New Replacement to add a phrase.") : "Try a shorter word or phrase."))
+                ContentUnavailableView(model.query.isEmpty ? (model.section == .issues ? "Everything looks tidy" : "Make your first shortcut") : "No matching entries", systemImage: model.section == .issues ? "checkmark.circle" : "text.magnifyingglass", description: Text(model.query.isEmpty ? ("Use New Replacement to add a phrase.") : "Try a shorter word or phrase."))
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 Table(model.visible, selection: $model.selection) {
-                    if model.section != .dictionary {
-                        TableColumn("Shortcut") { row in InlineCell(model: model, row: row, field: .shortcut) }.width(min: 100, ideal: 145, max: 240)
-                    }
-                    TableColumn(model.section == .dictionary ? "Word" : "Phrase") { row in InlineCell(model: model, row: row, field: .phrase) }.width(min: 300)
+                    TableColumn("Shortcut") { row in InlineCell(model: model, row: row, field: .shortcut) }.width(min: 100, ideal: 145, max: 240)
+                    TableColumn("Phrase") { row in InlineCell(model: model, row: row, field: .phrase) }.width(min: 300)
                     TableColumn("") { row in
                         if model.issueIDs.contains(row.id) { Image(systemName: "exclamationmark.triangle.fill").foregroundStyle(.orange).help("Duplicate or conflicting shortcut").accessibilityLabel("Duplicate or conflict") }
                     }.width(26)
@@ -164,13 +161,13 @@ struct InlineCell: View {
     }
     var body: some View {
         HStack(spacing: 6) {
-            TextField(field == .shortcut ? "Dictionary word" : "Phrase", text: Binding(get: { value }, set: { model.setDraft($0, row: row, field: field) }), axis: .vertical)
+            TextField(field == .shortcut ? "No shortcut" : "Phrase", text: Binding(get: { value }, set: { model.setDraft($0, row: row, field: field) }), axis: .vertical)
                 .font(field == .shortcut ? .system(.body, design: .monospaced) : .body)
                 .lineLimit(focused || model.drafts[row.id] != nil ? 1...8 : 1...1).textFieldStyle(.plain).focused($focused)
-                .onSubmit { save() }.disabled(!model.canWrite)
-                .accessibilityLabel(field == .shortcut ? "Shortcut" : model.section == .dictionary ? "Word" : "Phrase")
+                .onSubmit { save() }.disabled(!model.canWrite || row.shortcut.isEmpty)
+                .accessibilityLabel(field == .shortcut ? "Shortcut" : "Phrase")
                 .accessibilityValue(value)
-                .help(value)
+                .help(row.shortcut.isEmpty ? "Word without a shortcut. Edit it on your iPhone or iPad." : value)
             if model.drafts[row.id] != nil && field == .phrase {
                 Button { save() } label: { Image(systemName: "checkmark.circle.fill") }.buttonStyle(.plain).foregroundStyle(.tint).help("Save both cells").disabled(!model.canWrite).accessibilityLabel("Save row")
                 Button { model.drafts[row.id] = nil } label: { Image(systemName: "xmark.circle") }.buttonStyle(.plain).foregroundStyle(.secondary).help("Cancel row edit").accessibilityLabel("Cancel row edit")

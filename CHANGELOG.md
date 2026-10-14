@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.2
+
+- Literal abbreviation-to-phrase icon, rendered with macOS's San Francisco system font.
+- Removed the Dictionary Words section and word-only add form: current macOS KeyboardServices rejects empty-shortcut writes.
+- Require shortcuts for new entries and reject unsupported word-only changes before any batch writes. Existing word-only entries remain visible and exportable.
+- Show save failures inside add, template and review forms, with Refresh Library when reconciliation is needed; keep entered text and avoid a second delayed alert after cancel.
+
 ## 0.3.1
 
 - Sparkle 2.10.0 updates from signed GitHub release assets.

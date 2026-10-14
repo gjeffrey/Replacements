@@ -19,7 +19,7 @@ struct ChangeReview: Identifiable {
         rows = changes.map { ReviewRow(change: $0) }
     }
 }
-enum Section: String, CaseIterable, Identifiable { case all, dictionary, issues, templates, details, history, sync; var id: String { rawValue } }
+enum Section: String, CaseIterable, Identifiable { case all, issues, templates, details, history, sync; var id: String { rawValue } }
 struct SyncCheck: Codable {
     var shortcut: String
     var phase: String
@@ -57,14 +57,14 @@ struct SyncCheck: Codable {
     private let backend: any ReplacementBackend
     private let engine: MutationEngine
     private let support: URL
-    init(demo: Bool = CommandLine.arguments.contains("--demo"), supportDirectory: URL? = nil) {
+    init(demo: Bool = CommandLine.arguments.contains("--demo"), supportDirectory: URL? = nil, backend: (any ReplacementBackend)? = nil) {
         self.demo = demo
         let base = supportDirectory ?? FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
         support = base.appendingPathComponent(demo ? "Replacements-Demo" : "Replacements", isDirectory: true)
         personalDetailsStore = PersonalDetailsStore(url: support.appendingPathComponent("personal-details.json"))
         history = HistoryStore(directory: support.appendingPathComponent("History", isDirectory: true))
-        backend = demo ? DemoBackend() : NativeBackend()
-        engine = MutationEngine(backend: backend, history: history)
+        self.backend = backend ?? (demo ? DemoBackend() : NativeBackend())
+        engine = MutationEngine(backend: self.backend, history: history)
         do { personalDetails = try personalDetailsStore.load() }
         catch { personalDetailsProblem = "Your saved details couldn’t be loaded. They have been preserved. Use Forget All in Your Details to reset them."; personalDetailsWritable = false }
         if let data = try? Data(contentsOf: support.appendingPathComponent("sync-check.json")) { syncCheck = try? JSONDecoder().decode(SyncCheck.self, from: data) }
@@ -72,11 +72,10 @@ struct SyncCheck: Codable {
     func navigate(_ destination: Section) {
         query = ""; selection.removeAll(); section = destination
     }
-    var shortcutCount: Int { entries.filter { !$0.shortcut.isEmpty }.count }
-    var dictionaryCount: Int { entries.filter { $0.shortcut.isEmpty }.count }
+    var presentsSheet: Bool { showAdd || showBulk || review != nil || selectedTemplate != nil }
+    var showsWindowError: Bool { error != nil && !presentsSheet }
     var visible: [Replacement] {
         entries.filter { row in
-            ((section ?? .all) != .all || !row.shortcut.isEmpty) && (section != .dictionary || row.shortcut.isEmpty) &&
             (section != .issues || issueIDs.contains(row.id)) && (query.isEmpty || row.shortcut.localizedStandardContains(query) || row.phrase.localizedStandardContains(query))
         }.sorted { $0.shortcut.localizedStandardCompare($1.shortcut) == .orderedAscending || ($0.shortcut == $1.shortcut && $0.phrase < $1.phrase) }
     }
@@ -88,7 +87,7 @@ struct SyncCheck: Codable {
     }
     func refresh() async {
         guard !busy else { return }
-        busy = true; defer { busy = false }
+        error = nil; busy = true; defer { busy = false }
         do {
             let read = try await backend.read()
             entries = read.entries; issueIDs = Validation.issueIDs(entries); source = read.source; writable = read.writable; loaded = true; needsRefresh = false
@@ -210,8 +209,7 @@ struct SyncCheck: Codable {
         } catch { self.error = error.localizedDescription }
     }
     func executeReview(_ pending: ChangeReview) async {
-        review = nil
-        _ = await mutate(pending.changes, baseline: pending.baseline, reason: pending.title)
+        if await mutate(pending.changes, baseline: pending.baseline, reason: pending.title) { review = nil }
     }
     func openSystemSettings() {
         NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.Keyboard-Settings.extension")!)
