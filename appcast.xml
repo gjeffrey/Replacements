@@ -3,22 +3,26 @@
     <channel>
         <title>Replacements</title>
         <item>
-            <title>0.3.1</title>
-            <pubDate>Tue, 13 Oct 2026 22:24:47 -0700</pubDate>
-            <link>https://github.com/gjeffrey/Replacements/releases/tag/v0.3.1</link>
-            <sparkle:version>6</sparkle:version>
-            <sparkle:shortVersionString>0.3.1</sparkle:shortVersionString>
+            <title>0.3.2</title>
+            <pubDate>Tue, 13 Oct 2026 23:06:47 -0700</pubDate>
+            <link>https://github.com/gjeffrey/Replacements/releases/tag/v0.3.2</link>
+            <sparkle:version>7</sparkle:version>
+            <sparkle:shortVersionString>0.3.2</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
-            <description sparkle:format="markdown"><![CDATA[## Replacements 0.3.1
+            <description sparkle:format="markdown"><![CDATA[# Replacements 0.3.2
 
-- Check for updates from the Replacements menu or Settings.
-- Automatic update checks can be turned on or off in Settings.
-- Downloads come from GitHub releases and are verified with Sparkle signatures.
-- Updates wait for unsaved edits and in-progress changes before restarting.
+A clearer icon and a simpler library, with save feedback that appears where you need it.
 
-This is the first update-enabled version. Install it once to receive future releases in the app.
+- New **brb → be right back** icon, set in macOS's San Francisco system font.
+- Removed the optional Dictionary Words view. New replacements require a shortcut on macOS; existing word-only entries remain visible and exportable.
+- Save failures now appear inside the add, template, or review form. Your text stays in place, and Refresh Library checks the result before another attempt.
+- Unsupported word-only changes stop before any batch writes.
+
+41 automated tests passed. Normal native shortcut creation, editing and deletion were verified again with temporary markers, then cleaned up. This universal Apple Silicon/Intel release is Developer ID signed, notarized and stapled, with a signed Sparkle update from GitHub.
+
+macOS 15 or later. Free, MIT licensed, no account or custom sync service.
 ]]></description>
-            <enclosure url="https://github.com/gjeffrey/Replacements/releases/download/v0.3.1/Replacements.zip" length="4750646" type="application/octet-stream" sparkle:edSignature="qSkC3RvImTl/VK1a3VfaHenQDuPRxRL/kBHbqyVeKWQGUbYVR/QuL+ztP6ceEwb2bqZhNVM8Cr9KQIfKNrdKDg=="/>
+            <enclosure url="https://github.com/gjeffrey/Replacements/releases/download/v0.3.2/Replacements.zip" length="2914374" type="application/octet-stream" sparkle:edSignature="M5zJtXdjjdIKIbgdigq9Ex0JUa3L1cJwigPKXLkhWe7Dv8neFGuxA1dR+eoEMAOLzoiKjf5KepqZFX7V1KERCA=="/>
         </item>
     </channel>
 </rss>
