@@ -3,26 +3,26 @@
     <channel>
         <title>Replacements</title>
         <item>
-            <title>0.3.2</title>
-            <pubDate>Tue, 13 Oct 2026 23:06:47 -0700</pubDate>
-            <link>https://github.com/gjeffrey/Replacements/releases/tag/v0.3.2</link>
-            <sparkle:version>7</sparkle:version>
-            <sparkle:shortVersionString>0.3.2</sparkle:shortVersionString>
+            <title>0.3.3</title>
+            <pubDate>Tue, 13 Oct 2026 23:27:33 -0700</pubDate>
+            <link>https://github.com/gjeffrey/Replacements/releases/tag/v0.3.3</link>
+            <sparkle:version>8</sparkle:version>
+            <sparkle:shortVersionString>0.3.3</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
-            <description sparkle:format="markdown"><![CDATA[# Replacements 0.3.2
+            <description sparkle:format="markdown"><![CDATA[# Replacements 0.3.3
 
-A clearer icon and a simpler library, with save feedback that appears where you need it.
+Pick a face. Choose your shortcut.
 
-- New **brb → be right back** icon, set in macOS's San Francisco system font.
-- Removed the optional Dictionary Words view. New replacements require a shortcut on macOS; existing word-only entries remain visible and exportable.
-- Save failures now appear inside the add, template, or review form. Your text stays in place, and Refresh Library checks the result before another attempt.
-- Unsupported word-only changes stop before any batch writes.
+- New **Emoticons** section in the template library with 200 faces: a static snapshot of Messletters' Popular collection plus a favorite eyes face.
+- Larger previews and a simple setup form with an empty, focused shortcut field. Choose your own shortcut before adding a face to Apple's library.
+- Exact Unicode expressions are preserved, including combining marks, spaces and emoji variation selectors. The collection stays local and does not fetch updates from the website.
+- Includes 0.3.2's San Francisco icon, simpler library and visible save-failure feedback.
 
-41 automated tests passed. Normal native shortcut creation, editing and deletion were verified again with temporary markers, then cleaned up. This universal Apple Silicon/Intel release is Developer ID signed, notarized and stapled, with a signed Sparkle update from GitHub.
+43 automated tests passed. The signed app's isolated demo flow was checked from searching for a face through choosing a shortcut and adding it. Universal Apple Silicon/Intel, Developer ID signed, notarized and stapled, with a signed Sparkle update from GitHub.
 
-macOS 15 or later. Free, MIT licensed, no account or custom sync service.
+macOS 15 or later. Free, MIT licensed, no account or custom sync service. [Emoticon source](https://www.messletters.com/en/emoticons/).
 ]]></description>
-            <enclosure url="https://github.com/gjeffrey/Replacements/releases/download/v0.3.2/Replacements.zip" length="2914374" type="application/octet-stream" sparkle:edSignature="M5zJtXdjjdIKIbgdigq9Ex0JUa3L1cJwigPKXLkhWe7Dv8neFGuxA1dR+eoEMAOLzoiKjf5KepqZFX7V1KERCA=="/>
+            <enclosure url="https://github.com/gjeffrey/Replacements/releases/download/v0.3.3/Replacements.zip" length="2954927" type="application/octet-stream" sparkle:edSignature="166TDQflTeX5EolDTY0OvKY2OzHfZJzNz2IVzg9fWK9XJbq+rdMIZVLxHq4HxANgXDa2T/MUtPTVeGeUSw+8BQ=="/>
         </item>
     </channel>
 </rss>
