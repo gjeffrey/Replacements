@@ -29,3 +29,9 @@ The feed includes only releases explicitly promoted by this process. GitHub prer
 ## Initial install
 
 Versions through 0.3.0 have no updater. Install 0.3.1 manually once. Later releases can be discovered and installed in the app. No separate website, account, custom server or sync service is required.
+
+## Verified 0.3.1 bootstrap
+
+The public feed, GitHub archive digest, Ed25519 verification and modified-archive rejection were checked. A lower-version signed copy updated itself to the notarized 0.3.1 payload and relaunched in a temporary directory; a read-only audit confirmed native replacement contents stayed unchanged. This test used a modified, signed lower build as recommended for development; the target archive was the actual notarized GitHub release. Both source and feed CI runs passed.
+
+Official references: [Sparkle setup](https://sparkle-project.org/documentation/), [programmatic integration](https://sparkle-project.org/documentation/programmatic-setup/), and [publishing updates](https://sparkle-project.org/documentation/publishing/).

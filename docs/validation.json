@@ -96,6 +96,13 @@
     "archiveSignatureVerified": true,
     "modifiedArchiveRejected": true,
     "privateKey": "Keychain only",
-    "pendingEditRelaunchGuards": "two tests passed"
+    "pendingEditRelaunchGuards": "two tests passed",
+    "liveFeedVerified": true,
+    "githubArchiveDigestVerified": true,
+    "lowerVersionDiscoveredUpdate": true,
+    "installedPayloadMatchedRelease": true,
+    "updatedTestCopyRelaunched": true,
+    "nativeEntriesUnchangedDuringTest": 31,
+    "githubCI": "passed"
   }
 }
