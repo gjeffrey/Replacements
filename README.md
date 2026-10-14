@@ -1,9 +1,9 @@
 <p align="center"><img src="Resources/AppIcon.png" width="112" alt="Replacements icon"></p>
 <h1 align="center">Replacements</h1>
 <p align="center">A little less typing. A better home for Apple's text replacements.</p>
-<p align="center"><a href="https://github.com/gjeffrey/Replacements/releases/tag/v0.3.0">Download for Mac</a> · <a href="docs/TEMPLATES.md">Template library</a> · <a href="CONTRIBUTING.md">Contribute</a></p>
+<p align="center"><a href="https://github.com/gjeffrey/Replacements/releases/tag/v0.3.1">Download for Mac</a> · <a href="docs/TEMPLATES.md">Template library</a> · <a href="CONTRIBUTING.md">Contribute</a></p>
 
-A small, free, native macOS app for managing the shortcuts already built into your Mac, iPhone and iPad. No account, subscription, custom expansion engine or custom sync service. SwiftUI, AppKit where needed, and zero third-party package dependencies. MIT licensed.
+A small, free, native macOS app for managing the shortcuts already built into your Mac, iPhone and iPad. No account, subscription, custom expansion engine or custom sync service. SwiftUI, AppKit where needed, with Sparkle for updates. MIT licensed; third-party notices are preserved.
 
 ![Compact shortcut library, using isolated demo data](docs/images/library.png)
 
@@ -21,9 +21,13 @@ A small, free, native macOS app for managing the shortcuts already built into yo
 
 ## Install
 
-[Download Replacements 0.3.0](https://github.com/gjeffrey/Replacements/releases/download/v0.3.0/Replacements.zip), unzip it, and move Replacements.app to Applications. Quit an older copy before replacing it.
+[Download Replacements 0.3.1](https://github.com/gjeffrey/Replacements/releases/download/v0.3.1/Replacements.zip), unzip it, and move Replacements.app to Applications. Quit an older copy before replacing it.
 
 The release is a universal Apple Silicon/Intel build, signed with Developer ID, notarized by Apple and stapled. macOS 15 or later. This is an early release: native integration and user-observed phone sync have been checked on macOS 27.0.1 on Apple Silicon; Intel runtime and the full supported-OS range still need testing.
+
+## Updates
+
+Check for Updates… is in the Replacements app menu and Settings. Automatic checks can be disabled in Settings. Update downloads come from GitHub releases and are verified by Sparkle; installation requires your choice and waits for pending edits/saves. Install 0.3.1 manually once if you have an earlier version. [Release/update instructions](docs/UPDATES.md).
 
 ## Build and try
 

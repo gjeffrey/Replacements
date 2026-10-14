@@ -1,6 +1,6 @@
 # Direct-distribution release
 
-Version **0.3.0** is signed with Developer ID Application: Gabriel Jeffrey (VDNJRV3PR9), bundle ID `com.gabrieljeffrey.replacements`, Hardened Runtime, and universal arm64/x86_64 binaries. Apple accepted notarization submission `2dad5c7c-205e-47fb-859b-4cdc094fa8a8`. The ticket is stapled, and a fresh extraction of the final `Replacements.zip` passed strict signature verification, ticket validation and Gatekeeper assessment. Release receipts are in `release/0.3.0/`. Native signed-app add/edit/delete and user-observed phone sync were verified on this Mac/phone pairing.
+Version **0.3.1** is signed with Developer ID Application: Gabriel Jeffrey (VDNJRV3PR9), bundle ID `com.gabrieljeffrey.replacements`, Hardened Runtime, and universal arm64/x86_64 binaries. Apple accepted notarization submission `2dff7936-ef08-4e15-b65c-1445f0ae55c2`. The ticket is stapled, and a fresh extraction of the final `Replacements.zip` passed strict signature verification, ticket validation and Gatekeeper assessment. Release receipts are in `release/0.3.1/`. Native signed-app add/edit/delete and user-observed phone sync were verified on this Mac/phone pairing.
 
 The following steps reproduce the release; the final package has already completed them. Credentials remain in the macOS Keychain and are not included in source or archives.
 
@@ -29,4 +29,6 @@ Apple's official guidance: [Notarizing macOS software before distribution](https
 
 A notarization ticket is a distribution check, not an Apple-supported contract for KeyboardServices. Maintain per-OS integration fixtures and an unsupported-platform state that disables writes when selectors or schema checks fail. Do not market “reliable iCloud sync” until device observations substantiate it.
 
-Source is published under MIT at https://github.com/gjeffrey/Replacements. The signed 0.3.0 archive is attached to the corresponding GitHub release. Signing credentials stay in the macOS Keychain and are never stored in the repository.
+Source is published under MIT at https://github.com/gjeffrey/Replacements. The signed 0.3.1 archive is attached to the corresponding GitHub release. Signing credentials stay in the macOS Keychain and are never stored in the repository.
+
+Sparkle helpers are signed inside out before the app. Full upstream license notices are included. See [update publishing](UPDATES.md) for generating the signed feed from the final notarized archive.

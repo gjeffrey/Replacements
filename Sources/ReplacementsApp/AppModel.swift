@@ -57,9 +57,9 @@ struct SyncCheck: Codable {
     private let backend: any ReplacementBackend
     private let engine: MutationEngine
     private let support: URL
-    init() {
-        demo = CommandLine.arguments.contains("--demo")
-        let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+    init(demo: Bool = CommandLine.arguments.contains("--demo"), supportDirectory: URL? = nil) {
+        self.demo = demo
+        let base = supportDirectory ?? FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
         support = base.appendingPathComponent(demo ? "Replacements-Demo" : "Replacements", isDirectory: true)
         personalDetailsStore = PersonalDetailsStore(url: support.appendingPathComponent("personal-details.json"))
         history = HistoryStore(directory: support.appendingPathComponent("History", isDirectory: true))
@@ -82,6 +82,10 @@ struct SyncCheck: Codable {
     }
     var selectedRows: [Replacement] { entries.filter { selection.contains($0.id) } }
     var canWrite: Bool { loaded && writable && !busy && !needsRefresh }
+    var updateMustWait: Bool {
+        busy || !drafts.isEmpty || (personalDetailsDraft != nil && personalDetailsDraft != personalDetails) ||
+        showAdd || showBulk || review != nil || selectedTemplate != nil
+    }
     func refresh() async {
         guard !busy else { return }
         busy = true; defer { busy = false }

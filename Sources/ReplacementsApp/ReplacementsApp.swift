@@ -2,8 +2,14 @@ import SwiftUI
 import AppKit
 
 @main struct ReplacementsApp: App {
-    @State private var model = AppModel()
+    @State private var model: AppModel
+    @State private var updates: UpdateController
     @AppStorage("showMenuBarIcon") private var showMenuBarIcon = false
+    init() {
+        let model = AppModel()
+        _model = State(initialValue: model)
+        _updates = State(initialValue: UpdateController(model: model))
+    }
     var body: some Scene {
         Window("Replacements", id: "main") {
             ContentView(model: model)
@@ -11,6 +17,9 @@ import AppKit
                 .task { await model.refresh() }
         }.defaultSize(width: 1100, height: 700)
             .commands {
+                CommandGroup(after: .appInfo) {
+                    Button("Check for Updates…") { updates.check() }.disabled(!updates.ready)
+                }
                 CommandGroup(replacing: .newItem) {
                     Button(model.section == .dictionary ? "New Dictionary Word…" : "New Replacement…") { model.showAdd = true }.keyboardShortcut("n").disabled(!model.canWrite)
                     Button("Import…") { model.importFile() }.keyboardShortcut("i", modifiers: [.command, .shift]).disabled(!model.canWrite)
@@ -28,7 +37,7 @@ import AppKit
         MenuBarExtra("Replacements", systemImage: "text.badge.plus", isInserted: $showMenuBarIcon) {
             QuickAddView(model: model)
         }.menuBarExtraStyle(.window)
-        Settings { PreferencesView(model: model).frame(width: 440).padding(24) }
+        Settings { PreferencesView(model: model, updates: updates).frame(width: 440).padding(24) }
     }
 }
 struct QuickAddView: View {
@@ -58,6 +67,7 @@ struct QuickAddView: View {
 }
 struct PreferencesView: View {
     @Bindable var model: AppModel
+    @Bindable var updates: UpdateController
     @AppStorage("showMenuBarIcon") private var showMenuBarIcon = false
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
@@ -66,6 +76,8 @@ struct PreferencesView: View {
             Text("Free v1 preview. An optional tip link can be added when the product is ready to release.").foregroundStyle(.secondary)
             Divider()
             Toggle("Show quick add in the menu bar", isOn: $showMenuBarIcon)
+            Toggle("Check for updates automatically", isOn: Binding(get: { updates.automaticChecks }, set: { updates.setAutomaticChecks($0) })).disabled(!updates.available)
+            Button("Check for Updates…") { updates.check() }.disabled(!updates.ready)
             Text("History stays on this Mac. Up to 50 snapshots are kept; export important backups for long-term storage.").font(.callout)
             Button("Show Local Backups") { model.revealHistory() }
             Button("Apple Keyboard Settings") { model.openSystemSettings() }

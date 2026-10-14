@@ -2,7 +2,7 @@
   "date": "2026-10-13",
   "platform": "macOS 27.0.1 (26A434), Apple Silicon",
   "automatedTests": {
-    "passed": 34,
+    "passed": 36,
     "failed": 0
   },
   "nativeProof": {
@@ -19,7 +19,7 @@
   "developerID": "verified installed identity",
   "notarization": {
     "status": "Accepted",
-    "submissionID": "2dad5c7c-205e-47fb-859b-4cdc094fa8a8",
+    "submissionID": "2dff7936-ef08-4e15-b65c-1445f0ae55c2",
     "stapled": true,
     "freshArchiveGatekeeperAssessment": "Notarized Developer ID"
   },
@@ -49,16 +49,16 @@
     }
   },
   "sourceReuse": {
-    "thirdPartyPackages": 0,
+    "thirdPartyPackages": 1,
     "AGPLOrUnlicensedSourceIncorporated": false,
     "license": "MIT"
   },
-  "version": "0.3.0",
+  "version": "0.3.1",
   "architectures": [
     "arm64",
     "x86_64"
   ],
-  "archiveSHA256": "be19786f3eba6220875447b98075583ae89f5b34f3824a3fbbda3ac8dca275aa",
+  "archiveSHA256": "3aac2311b9b29bd6c9a2f44a7e5e4c3af89be5f5702024b61b9ece1b6c8358f1",
   "templates": {
     "count": 59,
     "rememberedDetails": "local private-permission profile; isolated demo profile",
@@ -88,5 +88,14 @@
     "selectedPhrasePreview": "verified",
     "menuBar": "optional, default off",
     "nativeWritesDuringUIChecks": false
+  },
+  "sparkle": {
+    "version": "2.10.0",
+    "signedNestedHelpers": true,
+    "feed": "https://raw.githubusercontent.com/gjeffrey/Replacements/main/appcast.xml",
+    "archiveSignatureVerified": true,
+    "modifiedArchiveRejected": true,
+    "privateKey": "Keychain only",
+    "pendingEditRelaunchGuards": "two tests passed"
   }
 }

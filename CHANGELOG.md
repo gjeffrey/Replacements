@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.1
+
+- Sparkle 2.10.0 updates from signed GitHub release assets.
+- Check for Updates… in the app menu and Settings, with configurable automatic checks.
+- Installation waits for in-progress saves and unsaved edits.
+- Release tooling verifies the final notarized archive and generates the signed appcast using a Keychain-only signing key.
+- Preserved full Sparkle license notices and signed embedded helpers.
+
 ## 0.3.0
 
 - Compact main library doubles as a shortcut reference, with one-line rows, a selected-phrase preview and a copy action.

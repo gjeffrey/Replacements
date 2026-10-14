@@ -17,7 +17,7 @@ The running Hardened Runtime app also exercised its guided device-sync test. The
 
 ## Automated checks
 
-**34 tests passed**, including:
+**36 tests passed**, including:
 
 - JSON/CSV/Apple plist Unicode, quotes, newlines, dictionary words, and malformed input.
 - Internal import conflicts, identical duplicates, ambiguous native pairs, and restore ordering/multiplicity.
@@ -71,3 +71,7 @@ The full suite passed: 31 core tests and 3 native adapter tests. The catalog has
 The final universal app built with Swift 6.4 and Xcode. The compact interface was inspected in isolated demo mode: no oversized main header/instructions, one-line table rows, separate Dictionary Words, selected-phrase preview/copy, and toolbar actions. Adding Appleseed through the word-only demo form produced one dictionary entry while Shortcuts remained at seven. All and Symbols template views were inspected. Repository screenshots show only demo/sample data. The updated icon was inspected at 128 pixels and in the sidebar. No live native mutations or profile changes were performed during these interface checks.
 
 The final 0.3.0 zip passed strict signature verification, stapled ticket validation, Gatekeeper assessment and universal architecture inspection after fresh extraction. It includes the MIT notice. Public CI is configured to run tests and build an ad-hoc app on a macOS runner; CI does not run live KeyboardServices writes or notarization. Historical phone-sync/native-write evidence above remains specific to the original pairing and is not a guarantee for every supported OS.
+
+## Version 0.3.1: Sparkle integration
+
+36 local tests passed, including two application-level tests that postpone installation until a row draft completes its verified save, or until remembered personal details are persisted. Sparkle 2.10.0 and its nested helpers are included, signed with the app’s Developer ID, and notarized. The generated feed’s archive length matches the final zip; its Ed25519 signature verifies with the app-specific Keychain key, and a modified archive is rejected. Private key material is never exported. Live GitHub discovery and installation are checked after feed publication.

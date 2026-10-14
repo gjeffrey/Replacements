@@ -8,7 +8,7 @@ bundle="$output_dir/Replacements.app"
 # Finder metadata is presentation data, not a security attribute. Keep quarantine intact.
 xattr -dr com.apple.FinderInfo "$bundle" 2>/dev/null || true
 xattr -dr com.apple.ResourceFork "$bundle" 2>/dev/null || true
-codesign --verify --strict --verbose=2 "$bundle"
+codesign --verify --deep --strict --verbose=2 "$bundle"
 signature="$(codesign -dv --verbose=2 "$bundle" 2>&1)"
 [[ "$signature" == *"Authority=Developer ID Application:"* ]] || { echo "Developer ID Application signing is required; ad-hoc builds cannot be notarized." >&2; exit 1; }
 submission_file="$output_dir/notarization-submission.json"
@@ -38,6 +38,6 @@ if result.get('status') != 'Accepted':
 PY
 xcrun stapler staple "$bundle"
 xcrun stapler validate "$bundle"
-codesign --verify --strict --verbose=2 "$bundle"
+codesign --verify --deep --strict --verbose=2 "$bundle"
 spctl --assess --type execute --verbose=2 "$bundle"
 ditto -c -k --keepParent "$bundle" "$output_dir/Replacements.zip"
