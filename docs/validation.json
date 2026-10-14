@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-13",
+  "platform": "macOS 27.0.1 (26A434), Apple Silicon",
+  "automatedTests": {
+    "passed": 34,
+    "failed": 0
+  },
+  "nativeProof": {
+    "readCount": 26,
+    "add": "verified",
+    "edit": "verified",
+    "delete": "verified",
+    "originalContentsPreserved": true,
+    "writeMechanism": "KeyboardServices",
+    "directSQLiteWrites": false,
+    "readFallback": "SQLite read-only"
+  },
+  "appSignature": "Developer ID Application: Gabriel Jeffrey (VDNJRV3PR9); Hardened Runtime; strict verification passed",
+  "developerID": "verified installed identity",
+  "notarization": {
+    "status": "Accepted",
+    "submissionID": "2dad5c7c-205e-47fb-859b-4cdc094fa8a8",
+    "stapled": true,
+    "freshArchiveGatekeeperAssessment": "Notarized Developer ID"
+  },
+  "deviceSync": {
+    "status": "creation, edit, and deletion observed by user on phone via guided app test",
+    "marker": ";rp-118e5819",
+    "macCreation": "verified",
+    "iPhoneOrIPadCreation": "user confirmation recorded in app",
+    "remoteEdit": "user confirmation recorded in app",
+    "remoteDelete": "user confirmation recorded in app",
+    "cloudMetadata": "needsSaveToCloud=0 and remote-record metadata present; does not prove device delivery",
+    "phoneOSVersion": "not provided",
+    "phoneTextExpansion": "not separately confirmed",
+    "observations": [
+      "2026-10-13T00:59:11Z: marker prepared on Mac",
+      "2026-10-13T00:59:12Z: native creation verified on Mac",
+      "2026-10-13T00:59:37Z: user observed created on iPhone/iPad",
+      "2026-10-13T01:01:59Z: user observed edited on iPhone/iPad",
+      "2026-10-13T01:02:06Z: user observed deleted on iPhone/iPad"
+    ],
+    "nativeCleanup": "both known test markers absent; 26 original replacements preserved",
+    "deviceToMac": "not tested",
+    "priorMarker": {
+      "shortcut": ";rp-7e5f0e84",
+      "creation": "user confirmed on phone in chat",
+      "nativeCleanup": "verified absent"
+    }
+  },
+  "sourceReuse": {
+    "thirdPartyPackages": 0,
+    "AGPLOrUnlicensedSourceIncorporated": false,
+    "license": "MIT"
+  },
+  "version": "0.3.0",
+  "architectures": [
+    "arm64",
+    "x86_64"
+  ],
+  "archiveSHA256": "be19786f3eba6220875447b98075583ae89f5b34f3824a3fbbda3ac8dca275aa",
+  "templates": {
+    "count": 59,
+    "rememberedDetails": "local private-permission profile; isolated demo profile",
+    "uiChecks": [
+      "library inspected",
+      "empty email template blocks add",
+      "unused shortcut suggested",
+      "email preview and demo addition verified",
+      "entered email saved in demo profile"
+    ],
+    "coreChecks": "catalog rendering, detail reuse, merging, persistence, validation, corruption preservation"
+  },
+  "searchRegression": {
+    "demoTemplateAddition": "8 rows shown, new entry selected, search empty",
+    "clearSearch": "7 rows restored from 1 filtered row; focus returned to search",
+    "nativeChanges": false
+  },
+  "templateGallery": {
+    "presentation": "sample phrase preview plus suggested shortcut; no card icons/title/description",
+    "samples": "Apple John Appleseed/example.com convention, Contacts example values and app-authored work/link adaptations",
+    "savedDetailSeparation": "verified in signed isolated demo UI",
+    "newTests": "gallery samples never act as saved details; search matches preview phrase",
+    "nativeMutationsDuringCheck": false
+  },
+  "compactLibrary": {
+    "dictionaryDemoAdd": "1 word and 7 shortcuts; empty shortcut is kept out of Shortcuts",
+    "selectedPhrasePreview": "verified",
+    "menuBar": "optional, default off",
+    "nativeWritesDuringUIChecks": false
+  }
+}

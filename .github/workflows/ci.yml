@@ -1,0 +1,22 @@
+name: macOS checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test-and-build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Toolchain
+        run: swift --version
+      - name: Tests with isolated temporary data
+        run: ./scripts/test.sh
+      - name: Build unsigned-for-distribution local app
+        env:
+          REPLACEMENTS_OUTPUT_DIR: ${{ runner.temp }}/replacements-ci
+        run: ./scripts/build-app.sh

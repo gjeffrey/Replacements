@@ -1,0 +1,11 @@
+.build/
+.swiftpm/
+.DS_Store
+*.xcuserstate
+*.app/
+*.zip
+*.dSYM/
+notarization-*.json
+notarization-*.sha256
+# Local release receipts belong in release assets, not the source tree.
+docs/release/
