@@ -129,7 +129,7 @@ public struct PersonalDetailsStore: Sendable {
     }
 }
 public enum TemplateCategory: String, CaseIterable, Identifiable, Sendable {
-    case essentials = "Essentials", work = "Work", everyday = "Everyday", symbols = "Symbols", fun = "Just for Fun"
+    case essentials = "Essentials", work = "Work", everyday = "Everyday", symbols = "Symbols", emoticons = "Emoticons", fun = "Just for Fun"
     public var id: String { rawValue }
 }
 public struct ShortcutTemplate: Identifiable, Hashable, Sendable {
@@ -249,5 +249,5 @@ public enum TemplateCatalog {
         .init(id:"checkmark",title:"Checkmark",summary:"Mark something complete.",category:.symbols,icon:"checkmark",shortcut:";check",body:"✓"),
         .init(id:"multiplication",title:"Multiplication sign",summary:"A multiplication sign instead of the letter x.",category:.symbols,icon:"multiply",shortcut:";times",body:"×"),
         .init(id:"approximately",title:"Approximately equal",summary:"A compact symbol for an estimate.",category:.symbols,icon:"equal",shortcut:";approx",body:"≈")
-    ]
+    ] + EmoticonCatalog.all
 }

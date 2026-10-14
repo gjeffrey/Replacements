@@ -55,3 +55,11 @@ Sources consulted on October 13, 2026:
 - [Native text-replacement notes/Markdown use cases](https://www.reddit.com/r/ObsidianMD/comments/162jrfb): reusable plain-text outlines. App-specific smart punctuation can still affect inserted Markdown.
 
 All additions save ordinary text. Outline sections are intentionally blank and filled after expansion. There is no automatic date calculation, clipboard interpolation, expansion-time form, script execution, rich-text insertion or cursor placement. Those commercial-tool features need a separate expansion engine and are not represented as supported native templates. No imported TextExpander/Raycast packages, AGPL/unlicensed code or source assets were used.
+
+## Emoticons in 0.3.3
+
+The Emoticons category contains a static snapshot of all **199** entries in the [Messletters Popular emoticons](https://www.messletters.com/en/emoticons/) list fetched on October 13, 2026, plus the requested eyes face, for 200 faces and 259 total templates. The requested hug `(っ◕‿◕)っ` is included in the Popular snapshot.
+
+Only the short conventional Unicode expressions were copied. Display labels and setup copy are app-authored; website HTML, CSS, JavaScript, click counts, ranking logic and other source assets are not included. The app never fetches this collection at runtime. A link credits the source in the category footer.
+
+Cards preview the face and offer Add. Setup starts with an empty, focused shortcut field, and preserves the exact expression in a larger preview. The user must choose a nonconflicting shortcut before a native replacement is added. No profile fields are required or remembered. Existing template categories keep their suggested shortcuts. Tests check all face renderings byte-for-byte, the requested expressions, empty-shortcut rejection before a snapshot, and successful isolated saving with a custom shortcut.

@@ -87,3 +87,11 @@ Normal KeyboardServices add/edit/delete passed again with unique temporary marke
 The new abbreviation-to-phrase icon is rendered with real macOS San Francisco typography and original paths. The universal 0.3.2 app is Developer ID signed, notarization Accepted (`e7ecee55-2f72-4d42-a4d4-7c4df94dae5c`), stapled, and passes strict signature and Gatekeeper checks. Phone-sync observations above remain historical; no new device propagation claim is made for this update.
 
 An isolated failure harness compiled the production views and model with a backend returning the reported KeyboardServices error. UI inspection confirmed the error appeared while Add was still open, both fields stayed intact, Refresh cleared the error and enabled an explicit retry without resending, and cancelling a subsequent failure returned to the library without a second alert. The library still required refresh before further writes. The harness never read or changed native replacements.
+
+## Version 0.3.3: static Emoticons library
+
+43 tests passed (32 core, 5 native adapter, 6 app). The collection contains all 199 short Unicode expressions captured from the Messletters Popular list on October 13, plus the requested eyes face, for 200 emoticons and 259 total templates. The app makes no runtime requests to the website. Tests verify all face renderings byte-for-byte, unique identities, no required personal details, no automatic shortcut selection, the requested hug/eyes expressions, and safe saving only after a custom shortcut is supplied.
+
+The signed universal app's isolated demo UI was inspected: Emoticons category, large face previews, source link, search for the exact requested hug, empty focused shortcut field and disabled Add, then a chosen `;hug-preview` shortcut enabling Add. Saving displayed the exact face in the main library, selected the new row and cleared search. No native entries or real profile data were changed by this UI test. A separate read-only lookup confirmed the user's `;logan` already contains the requested eyes face with exact UTF8 bytes; it was not duplicated.
+
+Notarization Accepted (`1529267f-4b6c-4411-8214-dff6cee5a213`), stapled ticket, strict Developer ID signature and Gatekeeper checks passed for the final archive. Previous live phone/native-write evidence remains historical.

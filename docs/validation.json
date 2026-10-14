@@ -2,7 +2,7 @@
   "date": "2026-10-13",
   "platform": "macOS 27.0.1 (26A434), Apple Silicon",
   "automatedTests": {
-    "passed": 41,
+    "passed": 43,
     "failed": 0
   },
   "nativeProof": {
@@ -19,7 +19,7 @@
   "developerID": "verified installed identity",
   "notarization": {
     "status": "Accepted",
-    "submissionID": "e7ecee55-2f72-4d42-a4d4-7c4df94dae5c",
+    "submissionID": "1529267f-4b6c-4411-8214-dff6cee5a213",
     "stapled": true,
     "freshArchiveGatekeeperAssessment": "Notarized Developer ID"
   },
@@ -53,14 +53,14 @@
     "AGPLOrUnlicensedSourceIncorporated": false,
     "license": "MIT"
   },
-  "version": "0.3.2",
+  "version": "0.3.3",
   "architectures": [
     "arm64",
     "x86_64"
   ],
-  "archiveSHA256": "37c35ba29a3c02b68f02eae9397c0668b4c88dd0b13a6ce193934326f66279d7",
+  "archiveSHA256": "584d8ecd7af7154b4ec27fe8e1911b679786825c5f5ab26fdda3c21e24635972",
   "templates": {
-    "count": 59,
+    "count": 259,
     "rememberedDetails": "local private-permission profile; isolated demo profile",
     "uiChecks": [
       "library inspected",
@@ -103,7 +103,8 @@
     "installedPayloadMatchedRelease": true,
     "updatedTestCopyRelaunched": true,
     "nativeEntriesUnchangedDuringTest": 31,
-    "githubCI": "passed"
+    "githubCI": "passed",
+    "fullInstallationTestVersion": "0.3.1"
   },
   "dictionaryRegression": {
     "nativeEmptyShortcut": "not verified; empty string rejected, nil did not preserve an empty shortcut and later appeared as a self-replacement",
@@ -117,5 +118,16 @@
     "concept": "brb \u2192 be right back",
     "font": "macOS San Francisco system font, .AppleSystemUIFontDemi",
     "rendering": "original AppKit paths and native typography; editable renderer included"
+  },
+  "emoticons": {
+    "count": 200,
+    "sourceSnapshot": 199,
+    "source": "https://www.messletters.com/en/emoticons/",
+    "requestedHug": "present",
+    "requestedEyes": "present",
+    "runtimeWebsiteFetch": false,
+    "initialShortcut": "empty, focused; user chooses before saving",
+    "unicode": "all renderings byte-for-byte checked",
+    "ui": "gallery and source link inspected; exact hug searched, custom shortcut entered and demo save verified; main library selected new row with search clear"
   }
 }

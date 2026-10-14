@@ -3,7 +3,7 @@ import ReplacementCore
 
 extension TemplateCategory {
     var tint: Color {
-        switch self { case .essentials: .blue; case .work: .indigo; case .everyday: .orange; case .symbols: .teal; case .fun: .pink }
+        switch self { case .essentials: .blue; case .work: .indigo; case .everyday: .orange; case .symbols: .teal; case .emoticons: .purple; case .fun: .pink }
     }
 }
 struct TemplateLibraryView: View {
@@ -27,7 +27,7 @@ struct TemplateLibraryView: View {
                 if templates.isEmpty {
                     ContentUnavailableView("No matching templates", systemImage: "text.magnifyingglass", description: Text("Try another word or category.")).padding(.top, 50)
                 } else {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 250, maximum: 420), spacing: 14)], spacing: 14) {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: category == .emoticons ? 190 : 250, maximum: 420), spacing: 14)], spacing: 14) {
                         ForEach(templates) { template in
                             TemplateCard(template: template, shortcut: template.suggestedShortcut(in: model.entries)) {
                                 model.selectedTemplate = template
@@ -37,10 +37,16 @@ struct TemplateLibraryView: View {
                 }
             }
             HStack(spacing: 10) {
-                Image(systemName: "person.crop.rectangle").foregroundStyle(.secondary)
-                Text(model.personalDetails.savedCount == 0 ? "Add your details once. Reuse them in other templates." : "Your saved details are ready for other templates.").font(.caption).foregroundStyle(.secondary)
-                Spacer()
-                Button("Your Details") { model.navigate(.details) }
+                if category == .emoticons {
+                    Text("Pick a face. Choose your shortcut.").font(.caption).foregroundStyle(.secondary)
+                    Spacer()
+                    Link("Popular on Messletters ↗", destination: URL(string: "https://www.messletters.com/en/emoticons/")!).font(.caption)
+                } else {
+                    Image(systemName: "person.crop.rectangle").foregroundStyle(.secondary)
+                    Text(model.personalDetails.savedCount == 0 ? "Add your details once. Reuse them in other templates." : "Your saved details are ready for other templates.").font(.caption).foregroundStyle(.secondary)
+                    Spacer()
+                    Button("Your Details") { model.navigate(.details) }
+                }
             }.padding(.bottom, 18)
         }.padding(.horizontal, 24)
     }
@@ -54,11 +60,11 @@ struct TemplateCard: View {
         Button(action: action) {
             VStack(alignment: .leading, spacing: 16) {
                 Text(phrase)
-                    .font(.system(size: template.category == .symbols ? 28 : 16)).foregroundStyle(.primary)
+                    .font(.system(size: template.category == .symbols ? 28 : template.category == .emoticons ? 24 : 16)).foregroundStyle(.primary)
                     .lineSpacing(3).lineLimit(5).truncationMode(.tail)
                     .frame(maxWidth: .infinity, minHeight: 104, maxHeight: 104, alignment: .topLeading)
                 HStack {
-                    Text(shortcut).font(.system(.caption, design: .monospaced)).foregroundStyle(.secondary)
+                    Text(shortcut.isEmpty ? "Choose shortcut" : shortcut).font(.system(.caption, design: .monospaced)).foregroundStyle(.secondary)
                     Spacer()
                     Text(template.fields.isEmpty ? "Add…" : "Personalize…").font(.caption).foregroundStyle(.secondary)
                 }
@@ -67,7 +73,7 @@ struct TemplateCard: View {
                 .overlay(RoundedRectangle(cornerRadius: 15).strokeBorder(.quaternary, lineWidth: 1))
                 .contentShape(RoundedRectangle(cornerRadius: 15))
         }.buttonStyle(.plain).help(template.category == .symbols ? template.title : phrase)
-            .accessibilityLabel("\(template.title). \(phrase). Shortcut \(shortcut).")
+            .accessibilityLabel("\(template.title). \(phrase). \(shortcut.isEmpty ? "Choose your own shortcut." : "Shortcut " + shortcut + ".")")
             .accessibilityHint(template.fields.isEmpty ? "Review before adding." : "Example details shown. Enter your own details and review before adding.")
     }
 }
@@ -95,6 +101,7 @@ struct TemplateSetupView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var details: PersonalDetails
     @State private var shortcut: String
+    @FocusState private var shortcutFocused: Bool
     @State private var remember = true
     // Intentional one-time draft seed: each opening starts with the latest saved personal details.
     init(model: AppModel, template: ShortcutTemplate) {
@@ -108,16 +115,20 @@ struct TemplateSetupView: View {
             do { try field.validate(details[field]) } catch { return error.localizedDescription }
         }
         guard let phrase else { return nil }
-        guard !shortcut.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return "A shortcut is required on macOS." }
+        guard !shortcut.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return template.category == .emoticons ? "Choose the shortcut you’d like to type." : "A shortcut is required on macOS." }
         let pair = Pair(shortcut: shortcut, phrase: phrase)
         do { try Validation.check(pair) } catch { return error.localizedDescription }
         return Validation.canInsert(pair, into: model.entries) ? nil : "This shortcut is already in your library. Choose another one."
     }
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
-            HStack(spacing: 13) {
-                Image(systemName: template.icon).font(.title2).foregroundStyle(template.category.tint).frame(width: 48, height: 48).background(template.category.tint.opacity(0.10), in: RoundedRectangle(cornerRadius: 12))
-                VStack(alignment: .leading, spacing: 5) { Text(template.title).font(.title2.bold()); Text(template.summary).foregroundStyle(.secondary) }
+            if template.category == .emoticons {
+                Text("New emoticon").font(.title2.bold())
+            } else {
+                HStack(spacing: 13) {
+                    Image(systemName: template.icon).font(.title2).foregroundStyle(template.category.tint).frame(width: 48, height: 48).background(template.category.tint.opacity(0.10), in: RoundedRectangle(cornerRadius: 12))
+                    VStack(alignment: .leading, spacing: 5) { Text(template.title).font(.title2.bold()); Text(template.summary).foregroundStyle(.secondary) }
+                }
             }
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
@@ -126,12 +137,12 @@ struct TemplateSetupView: View {
                     }
                     VStack(alignment: .leading, spacing: 6) {
                         Text("What would you like to type?").font(.callout.weight(.medium))
-                        TextField("Shortcut", text: $shortcut).textFieldStyle(.roundedBorder).font(.system(.body, design: .monospaced)).autocorrectionDisabled()
+                        TextField("Shortcut", text: $shortcut).textFieldStyle(.roundedBorder).font(.system(.body, design: .monospaced)).autocorrectionDisabled().focused($shortcutFocused)
                         Text("The ; prefix helps keep it out of ordinary sentences. You can choose your own shortcut.").font(.caption).foregroundStyle(.secondary)
                     }
                     VStack(alignment: .leading, spacing: 10) {
-                        Label("Your phrase", systemImage: "text.alignleft").font(.callout.weight(.semibold)).foregroundStyle(.secondary)
-                        if let phrase { Text(phrase).textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading) }
+                        Label(template.category == .emoticons ? "Emoticon" : "Your phrase", systemImage: "text.alignleft").font(.callout.weight(.semibold)).foregroundStyle(.secondary)
+                        if let phrase { Text(phrase).font(template.category == .emoticons ? .system(size: 28) : .body).textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading) }
                         else { Text("Add your details above to see the exact phrase you’ll save.").foregroundStyle(.secondary) }
                     }.padding(16).frame(maxWidth: .infinity, alignment: .leading).background(.quaternary.opacity(0.35), in: RoundedRectangle(cornerRadius: 12))
                 }.padding(.vertical, 2)
@@ -153,6 +164,7 @@ struct TemplateSetupView: View {
             }
         }.padding(26).frame(width: 560, height: template.fields.isEmpty ? 410 : 650)
             .modifier(SheetOperationFeedback(model: model))
+            .onAppear { if template.category == .emoticons { shortcutFocused = true } }
     }
 }
 struct PersonalDetailsView: View {

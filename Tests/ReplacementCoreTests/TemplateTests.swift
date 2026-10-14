@@ -10,12 +10,25 @@ private let exampleDetails = PersonalDetails(values: [
 ])
 @Test func everyTemplateHasUniqueIdentityAndCanRenderWithoutPlaceholders() throws {
     #expect(Set(TemplateCatalog.all.map(\.id)).count == TemplateCatalog.all.count)
-    #expect(Set(TemplateCatalog.all.map(\.shortcut)).count == TemplateCatalog.all.count)
+    let suggested = TemplateCatalog.all.map(\.shortcut).filter { !$0.isEmpty }
+    #expect(Set(suggested).count == suggested.count)
     for template in TemplateCatalog.all {
         let phrase = try template.render(with: exampleDetails)
         #expect(!phrase.contains("{{"))
         try Validation.check(Pair(shortcut: template.shortcut, phrase: phrase))
     }
+}
+
+@Test func emoticonsPreserveUnicodeAndRequireAChosenShortcut() throws {
+    #expect(EmoticonCatalog.all.count == 200)
+    #expect(Set(EmoticonCatalog.all.map(\.id)).count == 200)
+    for face in EmoticonCatalog.all {
+        #expect(face.category == .emoticons && face.fields.isEmpty && face.shortcut.isEmpty)
+        #expect(face.suggestedShortcut(in: [Replacement(shortcut: ";face", phrase: "Existing")]).isEmpty)
+        #expect(Data(try face.render(with: PersonalDetails()).utf8) == Data(face.body.utf8))
+    }
+    #expect(EmoticonCatalog.all.contains { $0.body == "(っ◕‿◕)っ" })
+    #expect(EmoticonCatalog.all.first { $0.id == "emoticon-eyes" }?.body == "( ͡👁️ ͜ʖ ͡👁️)")
 }
 @Test func missingDetailsPreventUnfilledTemplatesFromBeingAdded() {
     let template = TemplateCatalog.all.first { $0.id == "contact-card" }!

@@ -60,3 +60,19 @@ private actor RejectingBackend: ReplacementBackend {
     #expect(model.needsRefresh && !model.canWrite)
     #expect(await backend.writes == 1)
 }
+
+@Test @MainActor func emoticonWaitsForCustomShortcutThenSavesExactFace() async throws {
+    let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    defer { try? FileManager.default.removeItem(at: directory) }
+    let model = AppModel(demo: true, supportDirectory: directory)
+    await model.refresh()
+    let face = EmoticonCatalog.all.first { $0.body == "(っ◕‿◕)っ" }!
+    #expect(await model.useTemplate(face, details: PersonalDetails(), shortcut: "", remember: false) == false)
+    #expect(model.snapshots.isEmpty)
+    await model.refresh()
+    #expect(await model.useTemplate(face, details: PersonalDetails(), shortcut: ";hug", remember: false))
+    #expect(model.entries.contains { $0.shortcut == ";hug" && Data($0.phrase.utf8) == Data(face.body.utf8) })
+    #expect(model.snapshots.count == 1)
+    #expect(model.query.isEmpty && model.section == .all)
+    #expect(model.personalDetails.savedCount == 0)
+}

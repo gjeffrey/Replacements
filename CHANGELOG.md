@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.3
+
+- New Emoticons category with a local snapshot of 199 Messletters Popular faces and an additional eyes face.
+- Larger face previews, a source link, and a focused setup form that lets each user choose their own shortcut before saving.
+- Exact Unicode, combining marks, spaces and emoji variation selectors are preserved.
+
 ## 0.3.2
 
 - Literal abbreviation-to-phrase icon, rendered with macOS's San Francisco system font.

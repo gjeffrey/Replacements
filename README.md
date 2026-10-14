@@ -1,7 +1,7 @@
 <p align="center"><img src="Resources/AppIcon.png" width="112" alt="Replacements icon"></p>
 <h1 align="center">Replacements</h1>
 <p align="center">A little less typing. A better home for Apple's text replacements.</p>
-<p align="center"><a href="https://github.com/gjeffrey/Replacements/releases/tag/v0.3.2">Download for Mac</a> · <a href="docs/TEMPLATES.md">Template library</a> · <a href="CONTRIBUTING.md">Contribute</a></p>
+<p align="center"><a href="https://github.com/gjeffrey/Replacements/releases/tag/v0.3.3">Download for Mac</a> · <a href="docs/TEMPLATES.md">Template library</a> · <a href="CONTRIBUTING.md">Contribute</a></p>
 
 A small, free, native macOS app for managing the shortcuts already built into your Mac, iPhone and iPad. No account, subscription, custom expansion engine or custom sync service. SwiftUI, AppKit where needed, with Sparkle for updates. MIT licensed; third-party notices are preserved.
 
@@ -10,17 +10,18 @@ A small, free, native macOS app for managing the shortcuts already built into yo
 ## Your words, in one place
 
 - **A compact reference.** Search your shortcuts, glance at their phrases, select an entry to preview and copy it, or edit it inline. Rows expand while editing.
-- **59 useful templates.** Contact details, signatures, meeting links, replies, plain-text outlines, symbols and small bits of fun. Cards show phrase previews; opening a template helps you fill in your own information.
+- **259 useful templates.** Contact details, signatures, meeting links, replies, plain-text outlines, symbols and small bits of fun. Cards show phrase previews; opening a template helps you fill in your own information.
+- **200 emoticons.** A static collection of Popular faces from Messletters plus a favorite. Preview a face, choose your own shortcut, then add it.
 - **Remembered details.** Save details locally and reuse them across templates. Edit or forget them whenever you like. Sample gallery data never becomes your personal data.
 - **Bulk tools with review.** Find/replace, multi-select deletion, JSON/CSV/Apple plist import/export, and duplicate/conflict detection.
 - **Local history.** A snapshot before every mutation, with up to 50 backups and reviewed restoration.
 - **Optional quick add.** Enable the menu-bar panel in Settings if you want it. It is off by default.
 
-![Template phrase previews, using sample data](docs/images/templates.png)
+![Popular emoticon previews in the isolated demo library](docs/images/emoticons.png)
 
 ## Install
 
-[Download Replacements 0.3.2](https://github.com/gjeffrey/Replacements/releases/download/v0.3.2/Replacements.zip), unzip it, and move Replacements.app to Applications. Quit an older copy before replacing it.
+[Download Replacements 0.3.3](https://github.com/gjeffrey/Replacements/releases/download/v0.3.3/Replacements.zip), unzip it, and move Replacements.app to Applications. Quit an older copy before replacing it.
 
 The release is a universal Apple Silicon/Intel build, signed with Developer ID, notarized by Apple and stapled. macOS 15 or later. This is an early release: native integration and user-observed phone sync have been checked on macOS 27.0.1 on Apple Silicon; Intel runtime and the full supported-OS range still need testing.
 
