@@ -3,21 +3,19 @@
     <channel>
         <title>Replacements</title>
         <item>
-            <title>0.3.4</title>
-            <pubDate>Fri, 16 Oct 2026 06:49:46 -0700</pubDate>
-            <link>https://github.com/gjeffrey/Replacements/releases/tag/v0.3.4</link>
-            <sparkle:version>9</sparkle:version>
-            <sparkle:shortVersionString>0.3.4</sparkle:shortVersionString>
+            <title>0.3.5</title>
+            <pubDate>Fri, 16 Oct 2026 09:15:28 -0700</pubDate>
+            <link>https://github.com/gjeffrey/Replacements/releases/tag/v0.3.5</link>
+            <sparkle:version>10</sparkle:version>
+            <sparkle:shortVersionString>0.3.5</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
-            <description sparkle:format="markdown"><![CDATA[# Replacements 0.3.4
+            <description sparkle:format="markdown"><![CDATA[# Replacements 0.3.5
 
-A new, more graphic app icon: two short character strokes become three word strokes through a curved blue arrow. Original vector artwork on a clean white Mac icon tile.
-
-The 259-template library, including 200 static emoticons, and all existing shortcut features are retained.
+The chosen Selection app icon: San Francisco ab lettering highlighted in blue, with selection handles and three text strokes on a clean white tile.
 
 Universal Apple Silicon/Intel app, Developer ID signed, notarized and stapled. macOS 15 or later. Free and open source.
 ]]></description>
-            <enclosure url="https://github.com/gjeffrey/Replacements/releases/download/v0.3.4/Replacements.zip" length="2794668" type="application/octet-stream" sparkle:edSignature="1tYFeVW1ZxQDw3U5ZGPFuKsQ/2Sm1SfDjq4cosaYELkw9iiBW5bFJpTIt98x7NJscX9/9bADJlzXJNcXG7mpCw=="/>
+            <enclosure url="https://github.com/gjeffrey/Replacements/releases/download/v0.3.5/Replacements.zip" length="2779258" type="application/octet-stream" sparkle:edSignature="aXcWhR2BYPgWldm23UFuvIrNjyoSiG+kTvlDP8IP0uaid95E5559Zt6fKiqT5xSzkBgLN4ubJfpgwuB0BjF1Cg=="/>
         </item>
     </channel>
 </rss>
