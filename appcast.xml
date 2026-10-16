@@ -3,26 +3,21 @@
     <channel>
         <title>Replacements</title>
         <item>
-            <title>0.3.3</title>
-            <pubDate>Tue, 13 Oct 2026 23:27:33 -0700</pubDate>
-            <link>https://github.com/gjeffrey/Replacements/releases/tag/v0.3.3</link>
-            <sparkle:version>8</sparkle:version>
-            <sparkle:shortVersionString>0.3.3</sparkle:shortVersionString>
+            <title>0.3.4</title>
+            <pubDate>Fri, 16 Oct 2026 06:49:46 -0700</pubDate>
+            <link>https://github.com/gjeffrey/Replacements/releases/tag/v0.3.4</link>
+            <sparkle:version>9</sparkle:version>
+            <sparkle:shortVersionString>0.3.4</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
-            <description sparkle:format="markdown"><![CDATA[# Replacements 0.3.3
+            <description sparkle:format="markdown"><![CDATA[# Replacements 0.3.4
 
-Pick a face. Choose your shortcut.
+A new, more graphic app icon: two short character strokes become three word strokes through a curved blue arrow. Original vector artwork on a clean white Mac icon tile.
 
-- New **Emoticons** section in the template library with 200 faces: a static snapshot of Messletters' Popular collection plus a favorite eyes face.
-- Larger previews and a simple setup form with an empty, focused shortcut field. Choose your own shortcut before adding a face to Apple's library.
-- Exact Unicode expressions are preserved, including combining marks, spaces and emoji variation selectors. The collection stays local and does not fetch updates from the website.
-- Includes 0.3.2's San Francisco icon, simpler library and visible save-failure feedback.
+The 259-template library, including 200 static emoticons, and all existing shortcut features are retained.
 
-43 automated tests passed. The signed app's isolated demo flow was checked from searching for a face through choosing a shortcut and adding it. Universal Apple Silicon/Intel, Developer ID signed, notarized and stapled, with a signed Sparkle update from GitHub.
-
-macOS 15 or later. Free, MIT licensed, no account or custom sync service. [Emoticon source](https://www.messletters.com/en/emoticons/).
+Universal Apple Silicon/Intel app, Developer ID signed, notarized and stapled. macOS 15 or later. Free and open source.
 ]]></description>
-            <enclosure url="https://github.com/gjeffrey/Replacements/releases/download/v0.3.3/Replacements.zip" length="2954927" type="application/octet-stream" sparkle:edSignature="166TDQflTeX5EolDTY0OvKY2OzHfZJzNz2IVzg9fWK9XJbq+rdMIZVLxHq4HxANgXDa2T/MUtPTVeGeUSw+8BQ=="/>
+            <enclosure url="https://github.com/gjeffrey/Replacements/releases/download/v0.3.4/Replacements.zip" length="2794668" type="application/octet-stream" sparkle:edSignature="1tYFeVW1ZxQDw3U5ZGPFuKsQ/2Sm1SfDjq4cosaYELkw9iiBW5bFJpTIt98x7NJscX9/9bADJlzXJNcXG7mpCw=="/>
         </item>
     </channel>
 </rss>
