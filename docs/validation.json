@@ -103,9 +103,9 @@
     "installedPayloadMatchedRelease": true,
     "updatedTestCopyRelaunched": true,
     "nativeEntriesUnchangedDuringTest": 31,
-    "githubCI": "0.3.4 source previously passed; current source verified locally",
+    "githubCI": "passed: source run 38930638821",
     "fullInstallationTestVersion": "0.3.1",
-    "currentVerifiedVersion": "0.3.4"
+    "currentVerifiedVersion": "0.3.5"
   },
   "dictionaryRegression": {
     "nativeEmptyShortcut": "not verified; empty string rejected, nil did not preserve an empty shortcut and later appeared as a self-replacement",

@@ -109,3 +109,5 @@ The published 0.3.4 GitHub archive digest matches the local notarized zip. Ed255
 All 43 tests passed. The master matches the chosen Selection artwork byte-for-byte: San Francisco ab lettering highlighted in blue, selection handles and three dark text strokes. Standard icon sizes were compiled, and the signed universal app's sidebar icon was visually verified in isolated demo mode. No native replacement operations were performed for this artwork change.
 
 Notarization Accepted (`74caae0c-d8b7-47d9-89d2-20f74e5d9328`), stapled ticket, strict Developer ID signature and Gatekeeper checks passed. The Substitution renderer is preserved as `render-icon-v034.swift`. Historical native/device sync evidence above is not a new claim for this artwork-only update.
+
+The published 0.3.5 archive digest matches the local notarized archive. Its Ed25519 signature verified with the app public key; modifying the archive caused verification to fail. The live HTTPS feed matches the generated signed feed byte-for-byte. GitHub source CI run `38930638821` passed its macOS tests and app build.
