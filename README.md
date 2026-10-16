@@ -1,7 +1,7 @@
 <p align="center"><img src="Resources/AppIcon.png" width="112" alt="Replacements icon"></p>
 <h1 align="center">Replacements</h1>
 <p align="center">A little less typing. A better home for Apple's text replacements.</p>
-<p align="center"><a href="https://github.com/gjeffrey/Replacements/releases/tag/v0.3.4">Download for Mac</a> · <a href="docs/TEMPLATES.md">Template library</a> · <a href="CONTRIBUTING.md">Contribute</a></p>
+<p align="center"><a href="https://github.com/gjeffrey/Replacements/releases/tag/v0.3.5">Download for Mac</a> · <a href="docs/TEMPLATES.md">Template library</a> · <a href="CONTRIBUTING.md">Contribute</a></p>
 
 A small, free, native macOS app for managing the shortcuts already built into your Mac, iPhone and iPad. No account, subscription, custom expansion engine or custom sync service. SwiftUI, AppKit where needed, with Sparkle for updates. MIT licensed; third-party notices are preserved.
 
@@ -21,7 +21,7 @@ A small, free, native macOS app for managing the shortcuts already built into yo
 
 ## Install
 
-[Download Replacements 0.3.4](https://github.com/gjeffrey/Replacements/releases/download/v0.3.4/Replacements.zip), unzip it, and move Replacements.app to Applications. Quit an older copy before replacing it.
+[Download Replacements 0.3.5](https://github.com/gjeffrey/Replacements/releases/download/v0.3.5/Replacements.zip), unzip it, and move Replacements.app to Applications. Quit an older copy before replacing it.
 
 The release is a universal Apple Silicon/Intel build, signed with Developer ID, notarized by Apple and stapled. macOS 15 or later. This is an early release: native integration and user-observed phone sync have been checked on macOS 27.0.1 on Apple Silicon; Intel runtime and the full supported-OS range still need testing.
 
@@ -71,4 +71,4 @@ Profiles and backups live in `~/Library/Application Support/Replacements`, with 
 
 Useful native-compatible templates, accessibility improvements and macOS compatibility reports are welcome. [Contribution guide](CONTRIBUTING.md) · [Issues](https://github.com/gjeffrey/Replacements/issues) · [Changelog](CHANGELOG.md).
 
-[MIT license](LICENSE). Original code and artwork; [reference acknowledgements](Resources/Acknowledgements.md), [template inspiration](docs/TEMPLATES.md), [icon design and rendering](docs/ICON-v034.md), and [signed distribution](docs/DISTRIBUTION.md). No AGPL or unlicensed source was incorporated.
+[MIT license](LICENSE). Original code and artwork; [reference acknowledgements](Resources/Acknowledgements.md), [template inspiration](docs/TEMPLATES.md), [icon design and rendering](docs/ICON-v035.md), and [signed distribution](docs/DISTRIBUTION.md). No AGPL or unlicensed source was incorporated.

@@ -19,7 +19,7 @@
   "developerID": "verified installed identity",
   "notarization": {
     "status": "Accepted",
-    "submissionID": "641ad96e-8cdb-4a4b-a0e5-87e23f6da8c2",
+    "submissionID": "74caae0c-d8b7-47d9-89d2-20f74e5d9328",
     "stapled": true,
     "freshArchiveGatekeeperAssessment": "Notarized Developer ID"
   },
@@ -53,12 +53,12 @@
     "AGPLOrUnlicensedSourceIncorporated": false,
     "license": "MIT"
   },
-  "version": "0.3.4",
+  "version": "0.3.5",
   "architectures": [
     "arm64",
     "x86_64"
   ],
-  "archiveSHA256": "eb4da55aef2a676f2267984f1c807fa5d1bc8d33d387406152ea04e74003a24c",
+  "archiveSHA256": "c9bbf847f2df841a9092860cf951174d27b80323a88d3b8f5e90982b72666183",
   "templates": {
     "count": 259,
     "rememberedDetails": "local private-permission profile; isolated demo profile",
@@ -103,7 +103,7 @@
     "installedPayloadMatchedRelease": true,
     "updatedTestCopyRelaunched": true,
     "nativeEntriesUnchangedDuringTest": 31,
-    "githubCI": "passed: source run 38911133015",
+    "githubCI": "0.3.4 source previously passed; current source verified locally",
     "fullInstallationTestVersion": "0.3.1",
     "currentVerifiedVersion": "0.3.4"
   },
@@ -116,10 +116,10 @@
     "feedbackUI": "Isolated harness using production views: error visible before Cancel; phrase preserved after Refresh; Cancel after failure showed no second alert."
   },
   "icon": {
-    "concept": "two short blue character strokes become three dark word strokes through a curved blue arrow",
-    "rendering": "original AppKit vector paths; editable renderer included",
-    "approvedConceptMatch": "generated master matches selected substitution preview byte-for-byte",
-    "liveUI": "selected icon visible in signed isolated demo sidebar"
+    "concept": "Selection: San Francisco ab lettering inside a blue selection highlight and handles, opening into three text strokes",
+    "rendering": "original AppKit paths and macOS system font; editable renderer included",
+    "approvedConceptMatch": "master matches selected Selection concept byte-for-byte",
+    "liveUI": "Selection icon confirmed in signed isolated demo sidebar"
   },
   "emoticons": {
     "count": 200,

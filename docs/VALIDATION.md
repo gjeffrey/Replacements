@@ -103,3 +103,9 @@ All 43 tests passed again. The new 1024-pixel icon master matches the selected S
 The signed universal app was opened in isolated demo mode and its new sidebar icon was visually confirmed. No native replacement operations were performed for this artwork change. Notarization Accepted (`641ad96e-8cdb-4a4b-a0e5-87e23f6da8c2`); staple validation, strict Developer ID signature and Gatekeeper assessment passed. The final archive is used unchanged for the signed update feed. Prior phone sync and live updater installation tests remain historical evidence.
 
 The published 0.3.4 GitHub archive digest matches the local notarized zip. Ed25519 verification passed against the app public key and rejected a modified archive. The live HTTPS feed matched the generated signed feed byte-for-byte. GitHub source CI run `38911133015` passed its macOS tests and app build.
+
+## Version 0.3.5: selected Selection icon — October 16, 2026
+
+All 43 tests passed. The master matches the chosen Selection artwork byte-for-byte: San Francisco ab lettering highlighted in blue, selection handles and three dark text strokes. Standard icon sizes were compiled, and the signed universal app's sidebar icon was visually verified in isolated demo mode. No native replacement operations were performed for this artwork change.
+
+Notarization Accepted (`74caae0c-d8b7-47d9-89d2-20f74e5d9328`), stapled ticket, strict Developer ID signature and Gatekeeper checks passed. The Substitution renderer is preserved as `render-icon-v034.swift`. Historical native/device sync evidence above is not a new claim for this artwork-only update.

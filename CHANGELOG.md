@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.5
+
+- Adopt the selected Selection app icon: San Francisco ab lettering in a blue selection highlight, opening into three dark text strokes.
+
 ## 0.3.4
 
 - New graphic app icon: two blue character strokes become three word strokes through a curved substitution arrow.
