@@ -2,12 +2,12 @@
 
 Three characters, **brb**, become three words, **be right back**. Blue abbreviation capsule, downward arrow, dark ink phrase, and a restrained white continuous-corner tile.
 
-The direction was explored with the built-in image generation tool. The user approved the literal direction and requested actual San Francisco type and a more Apple-like treatment. The final original icon is drawn completely from paths and macOS's system font by [render-icon.swift](../scripts/render-icon.swift), rather than editing or tracing the generated bitmap. The font resolved to `.AppleSystemUIFontDemi` on the development Mac. The PNG is rasterized on macOS; no font file is redistributed.
+The direction was explored with the built-in image generation tool. The user approved the literal direction and requested actual San Francisco type and a more Apple-like treatment. The final original icon is drawn completely from paths and macOS's system font by [render-icon.swift](../scripts/render-icon-v032.swift), rather than editing or tracing the generated bitmap. The font resolved to `.AppleSystemUIFontDemi` on the development Mac. The PNG is rasterized on macOS; no font file is redistributed.
 
 Regenerate on a Mac:
 
 ```sh
-swift scripts/render-icon.swift Resources/AppIcon.png
+swift scripts/render-icon-v032.swift Resources/AppIcon.png
 scripts/build-icon.sh
 ```
 

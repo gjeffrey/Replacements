@@ -95,3 +95,9 @@ An isolated failure harness compiled the production views and model with a backe
 The signed universal app's isolated demo UI was inspected: Emoticons category, large face previews, source link, search for the exact requested hug, empty focused shortcut field and disabled Add, then a chosen `;hug-preview` shortcut enabling Add. Saving displayed the exact face in the main library, selected the new row and cleared search. No native entries or real profile data were changed by this UI test. A separate read-only lookup confirmed the user's `;logan` already contains the requested eyes face with exact UTF8 bytes; it was not duplicated.
 
 Notarization Accepted (`1529267f-4b6c-4411-8214-dff6cee5a213`), stapled ticket, strict Developer ID signature and Gatekeeper checks passed for the final archive. Previous live phone/native-write evidence remains historical.
+
+## Version 0.3.4: selected substitution icon — October 16, 2026
+
+All 43 tests passed again. The new 1024-pixel icon master matches the selected Substitution concept byte-for-byte, with standard macOS icon sizes compiled from it. The graphic consists of two short blue character strokes, three longer dark word strokes and one curved substitution arrow. The earlier San Francisco abbreviation renderer is preserved as `render-icon-v032.swift`.
+
+The signed universal app was opened in isolated demo mode and its new sidebar icon was visually confirmed. No native replacement operations were performed for this artwork change. Notarization Accepted (`641ad96e-8cdb-4a4b-a0e5-87e23f6da8c2`); staple validation, strict Developer ID signature and Gatekeeper assessment passed. The final archive is used unchanged for the signed update feed. Prior phone sync and live updater installation tests remain historical evidence.

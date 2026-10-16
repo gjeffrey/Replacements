@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-13",
+  "date": "2026-10-16",
   "platform": "macOS 27.0.1 (26A434), Apple Silicon",
   "automatedTests": {
     "passed": 43,
@@ -19,7 +19,7 @@
   "developerID": "verified installed identity",
   "notarization": {
     "status": "Accepted",
-    "submissionID": "1529267f-4b6c-4411-8214-dff6cee5a213",
+    "submissionID": "641ad96e-8cdb-4a4b-a0e5-87e23f6da8c2",
     "stapled": true,
     "freshArchiveGatekeeperAssessment": "Notarized Developer ID"
   },
@@ -53,12 +53,12 @@
     "AGPLOrUnlicensedSourceIncorporated": false,
     "license": "MIT"
   },
-  "version": "0.3.3",
+  "version": "0.3.4",
   "architectures": [
     "arm64",
     "x86_64"
   ],
-  "archiveSHA256": "584d8ecd7af7154b4ec27fe8e1911b679786825c5f5ab26fdda3c21e24635972",
+  "archiveSHA256": "eb4da55aef2a676f2267984f1c807fa5d1bc8d33d387406152ea04e74003a24c",
   "templates": {
     "count": 259,
     "rememberedDetails": "local private-permission profile; isolated demo profile",
@@ -103,7 +103,7 @@
     "installedPayloadMatchedRelease": true,
     "updatedTestCopyRelaunched": true,
     "nativeEntriesUnchangedDuringTest": 31,
-    "githubCI": "passed",
+    "githubCI": "0.3.3 previously passed; 0.3.4 publication pending",
     "fullInstallationTestVersion": "0.3.1"
   },
   "dictionaryRegression": {
@@ -115,9 +115,10 @@
     "feedbackUI": "Isolated harness using production views: error visible before Cancel; phrase preserved after Refresh; Cancel after failure showed no second alert."
   },
   "icon": {
-    "concept": "brb \u2192 be right back",
-    "font": "macOS San Francisco system font, .AppleSystemUIFontDemi",
-    "rendering": "original AppKit paths and native typography; editable renderer included"
+    "concept": "two short blue character strokes become three dark word strokes through a curved blue arrow",
+    "rendering": "original AppKit vector paths; editable renderer included",
+    "approvedConceptMatch": "generated master matches selected substitution preview byte-for-byte",
+    "liveUI": "selected icon visible in signed isolated demo sidebar"
   },
   "emoticons": {
     "count": 200,

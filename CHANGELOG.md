@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.4
+
+- New graphic app icon: two blue character strokes become three word strokes through a curved substitution arrow.
+- Original vector artwork, with the editable macOS renderer included.
+
 ## 0.3.3
 
 - New Emoticons category with a local snapshot of 199 Messletters Popular faces and an additional eyes face.
